@@ -37,8 +37,3 @@ done
 
 echo -e "Job completed: $(date)\n" 1>>log/$job_name.$idx.out 2>>log/$job_name.$idx.err
 
-#input_fn=All_EES_50_window_regions_w_min_3_ES_per_window_using_5_indv_cutoff_in_chunks.bed
-#distance=200
-
-#output_fn="Merged_"$distance"_dist_"$input_fn
-#bedtools sort -i $input_fn | bedtools merge -d $distance -s > $output_fn
