@@ -2,7 +2,7 @@
 #Script Name    : Identify_dsRNAs_step5_RNAfold.py
 #Description    : Extract the sequence and save the percent basepaired and the free energy
 #Args_in        : All ES sites and a minimum number of people (This is five people)
-#Args_out   :
+#Args_out   : Outputs a file of EERs and their RNA fold metrics to determine whether they are high confidence dsRNAs
 #Author     : Mudra Choudhury
 #Email      : mudrachoudhury3@gmail.com
 #Date       :
