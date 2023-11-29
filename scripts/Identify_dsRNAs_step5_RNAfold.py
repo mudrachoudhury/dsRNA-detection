@@ -403,6 +403,13 @@ if __name__ == "__main__":
     #regions_fn=(open(input_fn,"r")).readlines()
     #regions_fn = regions_fn[8500:9000] #for debugging
     for line in regions_fn:
+        # Processing each line for extracting and annotating RNA structure
+        # Various computations like RNA folding, calculating free energy, maximum error accuracy (MEA), etc., are performed.
+
+        # RNAfold is used for folding the sequence and extracting structural information
+        # The output from RNAfold is parsed to extract various metrics like free energy, MEA, etc.
+        # The annotateFold function is used to annotate the RNA structure based on the folding result
+        # The features_of_annotations function then analyzes these annotations to calculate various features
         i=i+1
         if i % 1000 == 0:
             print "Iteration: ", i, "_________________"
