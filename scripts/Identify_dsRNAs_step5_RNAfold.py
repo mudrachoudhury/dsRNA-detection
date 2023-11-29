@@ -1,14 +1,16 @@
 ###################################################################
-#Script Name    : Identify_dsRNAs_step5_RNAfold.py
-#Description    : Extract the sequence and save the percent basepaired and the free energy
-#Args_in        : All ES sites and a minimum number of people (This is five people)
-#Args_out   : Outputs a file of EERs and their RNA fold metrics to determine whether they are high confidence dsRNAs
-#Author     : Mudra Choudhury
-#Email      : mudrachoudhury3@gmail.com
-#Date       :
-#Last Edited    :
+# Script Name: Identify_dsRNAs_step5_RNAfold.py
+# Description: This script extracts the sequence and saves the percent basepaired 
+#              and the free energy for determining high confidence dsRNAs.
+# Args_in: All ES (Editing Site) sites and a minimum number of people (This is five people).
+# Args_out: Outputs a file of EERs (Editing Enriched Regions) and their RNA fold metrics.
+# Author: Mudra Choudhury
+# Email: 
+# Date: 02/2019
+# Last Edited: 
 ###################################################################
 
+# Import necessary libraries
 from collections import defaultdict
 import sys
 import pickle
@@ -20,7 +22,13 @@ import re
 from itertools import groupby
 from Bio.Seq import Seq
 
-
+# Functions defined in the script:
+# 1. get_longest_dsRNA: Finds the longest dsRNA with less than a specified percentage of mismatches.
+# 2. get_longest_stem: Identifies the longest stem structure with less than a specified percentage of mismatches.
+# 3. features_of_annotations: Analyzes the RNA structure and calculates various features like percentage of bulge, stem, loop, etc.
+# 4. updateMinorSpace: Updates the regions of the RNA that are not part of the stem-loop structure.
+# 5. annotateFold: Annotates the RNA fold structure, identifying different structural elements like loops, stems, bulges, etc.
+# 6. findOccurrences: Helper function to find occurrences of a character in a string.
 
 def get_longest_dsRNA(grouped_annot, max_mismatch_perc):
     #Get longest dsRNA with less than max% mismatches:
@@ -360,21 +368,20 @@ def annotateFold(foldStructure):
 
 
 
-
+# Main program execution starts here
 if __name__ == "__main__":
+    # Set up argument parser for command line inputs
     parser = argparse.ArgumentParser(description='Input Files')
     parser.add_argument('--i', metavar='input_bed_file', type=str, help='Bed file with EES regions of certain length')
     parser.add_argument('--o', metavar='output_bed_file', type=str, help='Output Bed file with EES regions and RNAfold info attached')
     args = parser.parse_args()
 
+    # Assign arguments to variables
     input_fn = args.i
     out_fn = args.o
-    max_mismatch_perc = 0.2
-    #input_fn = "/home/mudrachoudhury/Xiaolab/Inverted_ALU_REI/Identify_dsRNAs/5_indv/Merged_50_dist_All_EES_50_window_regions_w_min_3_ES_per_window_using_5_indv_cutoff_in_chunks_300_length_cutoff.bed"
-    #out_fn = "/home/mudrachoudhury/Xiaolab/Inverted_ALU_REI/Identify_dsRNAs/5_indv/Merged_50_dist_All_EES_50_window_regions_w_min_3_ES_per_window_using_5_indv_cutoff_in_chunks_300_length_cutoff_wRNAfold.bed"
+    max_mismatch_perc = 0.2 # Set maximum mismatch percentage
 
-
-
+    # Load the whole hg19 genome from a pickle file
     genome_seq_fn = "/home/stran/hyperediting_pipeline_EX/hg19/genome.pickle"
     print "Loading the pickle of whole hg19 genome..."
     seq_pickle_open = open(genome_seq_fn, 'r')
